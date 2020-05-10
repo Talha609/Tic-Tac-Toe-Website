@@ -1,0 +1,77 @@
+<html>
+    <head>
+        
+        <title>Game</title>
+
+        <link type="text/css" href="layout.css" rel="stylesheet">
+        
+        <script type="text/javascript" language="javascript">
+            var turn = "X";
+            var count = 0;
+            var thread = 1;
+            var visited = ["","","","","","","","",""];
+            function buttonPressed(clicks)
+            {
+                document.getElementById(clicks).value = turn;
+                visited[clicks] = turn;
+                turn = turn == "X" ? "O" : "X";
+                count += 1;
+                sleep(thread);
+                if(count >= 2)
+                {
+                    checkAns();
+                }
+            }
+            function sleep(thread)
+            {
+                thread = thread + 1;
+                if(thread != 500)
+                    sleep(thread);
+            }
+            function checkAns()
+            {
+                var ans = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+                for(var x=0;x<=ans.length-1;x++)
+                {
+                    var temp = ans[x];
+                    var a1 = temp[0];
+                    var a2 = temp[1];
+                    var a3 = temp[2];
+                    if(visited[a1] != "" && visited[a1] == visited[a2] && visited[a2] == visited[a3])
+                    {
+                        var t = document.getElementById(a1).value;
+                        alert(t + " Won");
+                        location.reload();
+                    }
+                }
+                if(count == 9)
+                {
+                    alert("Restart The Game");
+                    location.reload();
+                }
+                
+            }
+        </script>
+    </head>
+    <body class="body">
+        <h1 style="text-align: center">Tic Tac Toe</h1>
+        <a href="https://programmings-java.blogspot.com/"><h2 style="text-align: center">Blogger</h2></a>
+        <div class = "border">
+            <div>
+                <input type = "buttons" class="button" name = "b" id = "0" onclick="buttonPressed(this.id)">
+                <input type = "buttons" class="button" name = "b" id = "1" onclick="buttonPressed(this.id)">
+                <input type = "buttons" class="button" name = "b" id = "2" onclick="buttonPressed(this.id)">
+            </div>
+            <div>
+                <input type = "buttons" class="button" name = "b" id = "3" onclick="buttonPressed(this.id)">
+                <input type = "buttons" class="button" name = "b" id = "4" onclick="buttonPressed(this.id)">
+                <input type = "buttons" class="button" name = "b" id = "5" onclick="buttonPressed(this.id)">
+            </div>
+            <div>
+                <input type = "buttons" class="button" name = "b" id = "6" onclick="buttonPressed(this.id)">
+                <input type = "buttons" class="button" name = "b" id = "7" onclick="buttonPressed(this.id)">
+                <input type = "buttons" class="button" name = "b" id = "8" onclick="buttonPressed(this.id)">
+            </div>
+        </div>
+    </body>
+</html>
